@@ -1,9 +1,9 @@
 const Router = require('express'); 
 const router = Router();
 
-router.get('/',(req,res)=>{
+router.post('/',(req,res)=>{
     try {
-        res.send("User is here")
+        res.status(200).send(`User is ${req.body.user}`)
     } catch (error) {
         console.log(" Error in get user")
     }

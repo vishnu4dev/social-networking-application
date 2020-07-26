@@ -7,7 +7,8 @@ const app = express();
 dbconnect();
 const PORT = process.env.PORT || 8000;
 
-
+// Use middle-ware
+app.use(express.json({extended:false}));
 
 /*Modules */
 app.use('/user',User); 
