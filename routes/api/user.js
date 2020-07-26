@@ -5,6 +5,8 @@ const Bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
 
 const userModel = require('../../model/User.model');
+const jwt = require('jsonwebtoken');
+const config = require('config');
 
 router.post('/', [
     check('name', 'Name is required').not().isEmpty(),
@@ -36,7 +38,16 @@ router.post('/', [
             const salt = await Bcrypt.genSaltSync(10);
             user.password = await Bcrypt.hash(password,salt);
             await user.save()
-           return res.send("User registerd")
+           
+           const payload ={
+               id: user.id,
+           }
+        jwt.sign(payload,config.get('jwtCode'),{expiresIn:36000},(err,token)=>{
+            if(err) throw err;
+            return res.status(200).send({token})
+        })
+
+        // return res.send("User registerd")
         } catch (error) {
             console.log("Error in reg user",error)
         }
