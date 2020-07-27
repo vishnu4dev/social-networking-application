@@ -9,7 +9,7 @@ const config = require('config');
 const { check, validationResult } = require('express-validator');
 
 
-router.post('/',[       
+router.post('/register',[       
 check('name', 'Name is required').not().isEmpty(),
 check('email', 'Please enter a valid email').isEmail(),
 check('password', 'Invalid password formate').isLength({ min: 6 })
@@ -56,5 +56,8 @@ check('password', 'Invalid password formate').isLength({ min: 6 })
         console.log(" Error in user REG")
     }
 })
+
+
+
 
 module.exports = router;
