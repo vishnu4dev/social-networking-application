@@ -1,9 +1,10 @@
 const Router = require('express');
 const router = Router();
+const auth = require('../../middleware/auth');
 
-router.get('/',(req,res)=>{
+router.post('/',auth,(req,res)=>{
     try {
-        res.send("Auth is here")
+        res.status(200).send("Authenticated")
     } catch (error) {
         console.log("Error in Auth")
     }
