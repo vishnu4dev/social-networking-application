@@ -59,7 +59,11 @@ check('password', 'Invalid password formate').isLength({ min: 6 })
 })
 
 /**post profile data */
-router.post('/UpdateProfile',User.setUserProfile)
+router.post('/setProfile',AuthController, [ check('status', 'status is required').not().isEmpty(),
+check('skills', 'Please enter list of skills').isEmail(),
+check('name', 'Profile Name').exists()],User.setUserProfile)
+
+// router.post('/setProfile',AuthController,Validate.ProfileValidator,User.setUserProfile)
 
 /**get profile data */
 router.get('/getUserProfile',AuthController,User.getCurrentProfile)
