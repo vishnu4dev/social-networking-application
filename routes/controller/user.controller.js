@@ -1,6 +1,7 @@
 
 import UserModel from '../../model/User.model';
 import UserProfile from '../../model/Profile.model';
+const { check, validationResult } = require('express-validator');
 
 
 export default class User {
@@ -23,10 +24,16 @@ export default class User {
      */
     async setUserProfile(req,res){
         try {
-            console.log("=== Req,",req.body)
-            return res.status(200)
-        } catch (error) {
-            return res.status(400).send("Error in setting user profile")
+            const {name,status,skills,phoneNumber,location} = req.body;
+            const profileDetails = new UserProfile({
+                name,status,skills,phoneNumber,location
+            })
+            const resp = await profileDetails.save()
+            if(!resp){res.status(400).send("Failed to set profile")}
+            return res.status(200).send(resp)
+           } catch (error) {
+               console.log("Error in profile setting")
+            // return res.status(400).send("Error in setting user profile")
         }
     }
 
