@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "dev": "nodemon index"
+    "dev": "nodemon --inspect index"
   },
   "author": "vishnu",
   "license": "ISC",
   "dependencies": {
+    "@babel/cli": "^7.10.5",
     "bcrypt": "^5.0.0",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.1",
@@ -27,5 +28,8 @@
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "rimraf": "^3.0.2"
+  },
+  "babel": {
+    "presets": ["@babel/preset-env"]
   }
 }

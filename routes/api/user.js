@@ -19,8 +19,7 @@ check('password', 'Invalid password formate').isLength({ min: 6 })
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             res.status(400).json({ errors: errors.array() })
-        }
-        try {
+        }else{
             let ifUserExist = await userModel.findOne({email});
             if(ifUserExist){
               return  res.status(400).send("Already exist")
@@ -46,11 +45,7 @@ check('password', 'Invalid password formate').isLength({ min: 6 })
         jwt.sign(payload,config.get('jwtCode'),{expiresIn:36000},(err,token)=>{
             if(err) throw err;
             return res.status(200).send({token})
-        })
-
-        // return res.send("User registerd")
-        } catch (error) {
-            console.log("Error in reg user",error)
+        })   
         }
     } catch (error) {
         console.log(" Error in user REG")
