@@ -8,6 +8,12 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
 
+import ValidatorController from '../../middleware/validator';
+import UserController from '../controller/user.controller';
+import AuthController from '../../middleware/auth';
+
+const Validate = new ValidatorController();
+const User = new UserController();
 
 router.post('/register',[       
 check('name', 'Name is required').not().isEmpty(),
@@ -52,7 +58,10 @@ check('password', 'Invalid password formate').isLength({ min: 6 })
     }
 })
 
+/**post profile data */
+router.post('/UpdateProfile',User.setUserProfile)
 
-
+/**get profile data */
+router.get('/getUserProfile',AuthController,User.getCurrentProfile)
 
 module.exports = router;

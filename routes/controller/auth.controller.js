@@ -1,8 +1,9 @@
 const  Bcrypt  = require('bcryptjs');
 const UserModel  = require('../../model/User.model');
 
- class AuthController {
-    login = async (req, res) => {
+export default class AuthController {
+    constructor(){}
+    async login(req, res,next) {
         try {
             const { email, password } = req.body;
             const user = await UserModel.findOne({email});
@@ -21,4 +22,3 @@ const UserModel  = require('../../model/User.model');
     }
 }
 
-module.exports = AuthController;

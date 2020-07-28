@@ -1,13 +1,11 @@
 const Router = require('express');
 const router = Router();
-const AuthMiddileWare = require('../../middleware/auth');
 const UserModel = require('../../model/User.model');
-const AuthController = require('../controller/auth.controller');
 const { check, validationResult } = require('express-validator');
 
-
-
-const auth = new AuthController();
+import AuthMiddileWare from '../../middleware/auth'
+import AuthController from '../controller/auth.controller'
+const Auth = new AuthController();
 
 router.post('/',AuthMiddileWare,async(req,res)=>{
     try {
@@ -25,6 +23,6 @@ router.post('/',AuthMiddileWare,async(req,res)=>{
 router.post('/login',[
     check('email','Please enter a valid mailID').isEmail().isEmpty(),
     check('password','Password is required').exists()],
-    auth.login)
+    Auth.login)
 
 module.exports = router;
