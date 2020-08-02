@@ -10,6 +10,7 @@ const config = require('config');
 import UserController from '../controller/user.controller';
 import AuthController from '../../middleware/auth';
 import {validate, RequestValidation} from '../../middleware/validator';
+import auth from '../../middleware/auth';
 
 const User = new UserController();
 
@@ -59,6 +60,15 @@ router.get('/listAllProfile',AuthController,User.getAllProfile);
 
 router.get('/:id',User.getProfileByUserId);
 
+router.delete('/',AuthController,User.deleteProfile);
 
+router.put('/expr',AuthController,User.addUserExpereince);
+
+router.delete('/experience/:exp_id',AuthController,User.deleteUserExperience);
+
+
+router.put('/education',AuthController,User.addUserAcademics);
+
+router.delete('/education/:edu_id',AuthController,User.deleteUserQualification)
 
 module.exports = router;
