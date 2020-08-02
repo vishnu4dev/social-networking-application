@@ -13,6 +13,11 @@ const validate=()=>{
             body('name').exists().withMessage('Name is req'), 
             body('email').isEmail().withMessage('Email is Invalid'), 
             body('password').isLength({ min: 6 }).withMessage('Password is invalid'), 
+        ],
+        "expr":[
+            body('title').exists().withMessage('title is req'), 
+            body('company').exists().withMessage('company is req'), 
+            body('fromDate').isDate().withMessage('fromDate is invalid'), 
         ]
     }
 }

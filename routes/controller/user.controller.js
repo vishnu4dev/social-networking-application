@@ -1,6 +1,7 @@
 
 import UserModel from '../../model/User.model';
 import UserProfileModel from '../../model/Profile.model';
+import ProfileModel from '../../model/Profile.model';
 const { check, validationResult } = require('express-validator');
 
 
@@ -87,7 +88,102 @@ export default class User {
                 res.status(200).send(profile);
             }
         } catch (error) {
+            if(error.kind === 'ObjectId'){
+                res.status(404).send("Invalid User Id ")
+            }
             res.status(500).send(errro.message)
+        }
+    }
+
+    async deleteProfile(req,res){
+        try {
+            let deletedProfile = await UserProfileModel.findOneAndDelete({user: req.user.id});
+            let deletedUser = await UserModel.findOneAndDelete({_id: req.user.id});
+            if(deletedProfile && deletedUser) res.status(200).send("User Profile Deleted");
+            else{
+                res.status(404).send("Delete User Failed")
+            }
+        } catch (error) {
+            res.status(500).send('Error in user profile delete')
+        }
+    }
+
+    async addUserExpereince (req,res){
+        try {
+            const {role,totalPeriod,companyName,location} = req.body;
+            let Expr = {role,totalPeriod,companyName,location}
+            let profile = await UserProfileModel.findOne({user: req.user.id});
+            if(profile){
+                /** Appending User profile with experience */
+                profile.expr.unshift(Expr);
+                await profile.save();
+                res.status(200).send(profile); 
+            }
+            else{
+                res.status(404).send("Invalid User");
+            }
+        } catch (error) {
+            console.log('Error in Data',error)
+            res.status(500).send("Unable to update Profile")
+        }
+    }
+
+    async addUserEducation(req,res){
+        try {
+            const {title,nameOfInstitution,year} = req.body;
+            let education = {title,nameOfInstitution,year};
+        } catch (error) {
+            res.status(500).send(error.message)
+        }
+    }
+
+    async deleteUserExperience(req,res){
+        try {
+            let {id} = req.params.exp_id;
+            let userProfile = await UserProfileModel.findOne({user:req.user.id});
+            if(!userProfile) res.status(404).send('User Not found');
+            else{
+            let removeItem = userProfile.expr.map(_item => _item.id).indexOf(id);
+            userProfile.expr.splice(removeItem,1);
+            await userProfile.save();
+            res.status(200).send(userProfile);
+            }
+        } catch (error) {
+            res.status(500).send(error.message);
+        }
+    }
+
+    async addUserAcademics (req,res){
+        try {
+            let User = await UserProfileModel.findOne({user:req.user.id})
+            if(User){
+                const {title,nameOfInstitution,year} = req.body;
+                let education = {title,nameOfInstitution,year};
+                User.education.unshift(education);
+                User.save();
+                res.status(200).send(User);
+            }
+            else{
+                res.status(403).send('Inavlid User');
+            }
+        } catch (error) {
+            res.status(500).send(error.message)
+        }
+    }
+
+    async deleteUserQualification(req,res){
+        try {
+            const {edu_id} = req.params;
+            let User = await UserProfileModel.findOne({user:req.user.id});
+            if(!User) res.status(404).send("Invalid User credentials ");
+            else{
+                let removeItemIndex = User.education.map(Item => Item.id).indexOf(edu_id);
+                User.education.splice(removeItemIndex,1);
+               await User.save();
+               res.status(200).send(User);
+            }
+        } catch (error) {
+            res.status(403).send(error.message);
         }
     }
 }
