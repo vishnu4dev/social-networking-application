@@ -6,26 +6,16 @@ const Bcrypt = require('bcryptjs');
 const userModel = require('../../model/User.model');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const { check, validationResult } = require('express-validator');
 
-import ValidatorController from '../../middleware/validator';
 import UserController from '../controller/user.controller';
 import AuthController from '../../middleware/auth';
+import {validate, RequestValidation} from '../../middleware/validator';
 
-const Validate = new ValidatorController();
 const User = new UserController();
 
-router.post('/register',[       
-check('name', 'Name is required').not().isEmpty(),
-check('email', 'Please enter a valid email').isEmail(),
-check('password', 'Invalid password formate').isLength({ min: 6 })
-], async(req, res) => {
+router.post('/register',validate().register,RequestValidation, async(req, res) => {
     try {
         const { name, password, email } = req.body;
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            res.status(400).json({ errors: errors.array() })
-        }else{
             let ifUserExist = await userModel.findOne({email});
             if(ifUserExist){
               return  res.status(400).send("Already exist")
@@ -52,20 +42,23 @@ check('password', 'Invalid password formate').isLength({ min: 6 })
             if(err) throw err;
             return res.status(200).send({token})
         })   
-        }
     } catch (error) {
         console.log(" Error in user REG")
     }
 })
 
 /**post profile data */
-router.post('/setProfile',AuthController, [ check('status', 'status is required').not().isEmpty(),
-check('skills', 'Please enter list of skills').isEmail(),
-check('name', 'Profile Name').exists()],User.setUserProfile)
+router.post('/setProfile',AuthController,validate().profile,RequestValidation,User.setUserProfile)
 
 // router.post('/setProfile',AuthController,Validate.ProfileValidator,User.setUserProfile)
 
 /**get profile data */
 router.get('/getUserProfile',AuthController,User.getCurrentProfile)
+
+router.get('/listAllProfile',AuthController,User.getAllProfile);
+
+router.get('/:id',User.getProfileByUserId);
+
+
 
 module.exports = router;
