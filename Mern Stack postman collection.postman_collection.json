@@ -1,0 +1,741 @@
+{
+	"info": {
+		"_postman_id": "df420f8e-fa43-46cf-bc47-3b23702891f7",
+		"name": "Mern Stack postman collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"name\":\"Vishnu\",\r\n \"email\":\"vishnu@gmail.com\",\r\n \"password\":\"12235678\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/user/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Register User",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"name\":\"Sasi\",\r\n \"email\":\"ivFilms@gmail.com\",\r\n \"password\":\"123456788\"\r\n}"
+						},
+						"url": {
+							"raw": "localhost:8000/user/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "183"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"b7-bEhR7y33bUPs/K8dgN/JPRNQciQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 01 Aug 2020 14:57:53 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMjU4MmYwMmI5NDdhMWY4MDk2MGJlMCIsImlhdCI6MTU5NjI5Mzg3MywiZXhwIjoxNTk2MzI5ODczfQ.fuGYrlonv8cFhkxPxC9DnxlYM2qTMj6WFoSULkw_trs\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Authenticate User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMjA2ZDExNmY5MGNhMzFjODM3M2E4ZiIsImlhdCI6MTU5NTk2MDU5NCwiZXhwIjoxNTk1OTk2NTk0fQ.m_JLze1Un33nbb6FrNjFFXNeibWeCyjuLso5E2oHYns",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "localhost:8000/auth/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						""
+					]
+				},
+				"description": "pass jwt token along with header"
+			},
+			"response": [
+				{
+					"name": "Authenticate User",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							},
+							{
+								"key": "x-auth-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMWYyYWMxMDgxMjgxMTg4ODdmYjMzZiIsImlhdCI6MTU5NTg3ODA4MSwiZXhwIjoxNTk1OTE0MDgxfQ.X86SeWAGrtf14nAjIyvh4WnoNU26eJxhz-lsLOy1jgk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "localhost:8000/auth/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"auth",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "204"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"cc-MoN3QSlYszyVfFJJWh1f1EF2rq0\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 27 Jul 2020 19:58:18 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"5f1f2ac108128118887fb33f\",\n    \"name\": \"hello\",\n    \"email\": \"hrlsmd@gmail.com\",\n    \"avatar\": \"//www.gravatar.com/avatar/663aed4fe3c8af8faf7fcad54746f419?s=200&r=pg&d=mm\",\n    \"date\": \"2020-07-27T19:28:01.186Z\",\n    \"__v\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "User Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"email\":\"codefish@gmail.com\",\r\n \"password\":\"12235678\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add profile details",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMjZkMzc4MGE4MDg2MWMzMGU0ODQwZSIsImlhdCI6MTU5NjM4MDAyNCwiZXhwIjoxNTk2NDE2MDI0fQ.v65f5HfVofwmW7iqetjfNzoo2rUVLMMXapd2RcYYW4w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"skill\":[\"JS\",\"TS\",\"HTML\",\"css\"],\r\n    \"status\":\"Studying\",\r\n    \"location\":\"Edison thuruth\",\r\n    \"name\":\"Code fish\",\r\n    \"address\":\"Chellanam\",\r\n    \"phoneNumber\":123456789\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/user/setProfile",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"setProfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Profile Name",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMjYzYjhiZjc5NmI1MTEwMGY2NGZmYiIsImlhdCI6MTU5NjM0MTEzMSwiZXhwIjoxNTk2Mzc3MTMxfQ.oqpXsGLXUvkHH2hXftsK1D0lSgqjwbN67f-7rvI5Ifo",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8000/user/getUserProfile",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"getUserProfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Profile",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMjYzYjhiZjc5NmI1MTEwMGY2NGZmYiIsImlhdCI6MTU5NjM0MTEzMSwiZXhwIjoxNTk2Mzc3MTMxfQ.oqpXsGLXUvkHH2hXftsK1D0lSgqjwbN67f-7rvI5Ifo",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8000/user/listAllProfile",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"listAllProfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Profile by user_id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/user/5f263b8bf",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"5f263b8bf"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User Profile",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMjY1MTFmNjY4ZjkwMmE5NGUxYzk2YyIsImlhdCI6MTU5NjM0NjY1NSwiZXhwIjoxNTk2MzgyNjU1fQ.4dkBZyf-M11exrE9IwFpx7XZLXh-ReNNbP-Wi7z9P6Q",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8000/user/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add User Expr to profile",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMjYzYjhiZjc5NmI1MTEwMGY2NGZmYiIsImlhdCI6MTU5NjM0MTEzMSwiZXhwIjoxNTk2Mzc3MTMxfQ.oqpXsGLXUvkHH2hXftsK1D0lSgqjwbN67f-7rvI5Ifo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"role\":\"Jr. Software developer\",\r\n    \"totalPeriod\" : \"1.5yr\",\r\n    \"companyName\": \"Wipro\",\r\n    \"location\":\"Blore\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/user/expr",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"expr"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Expr ",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMjYzYjhiZjc5NmI1MTEwMGY2NGZmYiIsImlhdCI6MTU5NjM0MTEzMSwiZXhwIjoxNTk2Mzc3MTMxfQ.oqpXsGLXUvkHH2hXftsK1D0lSgqjwbN67f-7rvI5Ifo",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8000/user/experience/5f2661f0cd288835bcdbcaee",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"experience",
+						"5f2661f0cd288835bcdbcaee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Educational Qualification",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMjYzYjhiZjc5NmI1MTEwMGY2NGZmYiIsImlhdCI6MTU5NjM0MTEzMSwiZXhwIjoxNTk2Mzc3MTMxfQ.oqpXsGLXUvkHH2hXftsK1D0lSgqjwbN67f-7rvI5Ifo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\" : \"M.Tech\",\r\n    \"nameOfInstitution\" : \"TocH\",\r\n    \"year\":\"2023\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/user/education",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"education"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete Educational Qualifications",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMjYzYjhiZjc5NmI1MTEwMGY2NGZmYiIsImlhdCI6MTU5NjM0MTEzMSwiZXhwIjoxNTk2Mzc3MTMxfQ.oqpXsGLXUvkHH2hXftsK1D0lSgqjwbN67f-7rvI5Ifo",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8000/user/education/5f26684bc9cbd113389fa363",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"education",
+						"5f26684bc9cbd113389fa363"
+					]
+				},
+				"description": "    "
+			},
+			"response": []
+		},
+		{
+			"name": "Edit User Profile",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Github repo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post content",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMjYzYjhiZjc5NmI1MTEwMGY2NGZmYiIsImlhdCI6MTU5NjkxNzcxNiwiZXhwIjoxNTk2OTUzNzE2fQ.a0Lji6R6phxy9uGcHjjY8-7ceqagWUMV_b6kvkqsxT4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\" First Content\",\r\n    \"text\" : \"Lorem ipsum is used here\",\r\n    \"date\" :\"02/20/2020\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/post/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"post",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Post's",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMjYzYjhiZjc5NmI1MTEwMGY2NGZmYiIsImlhdCI6MTU5NjkxNzcxNiwiZXhwIjoxNTk2OTUzNzE2fQ.a0Lji6R6phxy9uGcHjjY8-7ceqagWUMV_b6kvkqsxT4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8000/post/fetch/5f263b8bf796b51100f64ffb",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"post",
+						"fetch",
+						"5f263b8bf796b51100f64ffb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User Post",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMjViNTdlMTk4NzQyMTJiMGNmOGE2YyIsImlhdCI6MTU5NjkxOTUzOSwiZXhwIjoxNTk2OTU1NTM5fQ.Ocwq-fpibFKNpkCCLq1G7hno_UIY2VGiNAPRc9mTfT0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8000/post/5f263b8bf796b51100f64ffb/5f2f0a18a3ad963a988a8a3c",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"post",
+						"5f263b8bf796b51100f64ffb",
+						"5f2f0a18a3ad963a988a8a3c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Like post",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMjViNTdlMTk4NzQyMTJiMGNmOGE2YyIsImlhdCI6MTU5NjkxOTUzOSwiZXhwIjoxNTk2OTU1NTM5fQ.Ocwq-fpibFKNpkCCLq1G7hno_UIY2VGiNAPRc9mTfT0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8000/post/like/5f2f099b10d6052314406bdd",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"post",
+						"like",
+						"5f2f099b10d6052314406bdd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "comment API",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMjViNTdlMTk4NzQyMTJiMGNmOGE2YyIsImlhdCI6MTU5NjkxOTUzOSwiZXhwIjoxNTk2OTU1NTM5fQ.Ocwq-fpibFKNpkCCLq1G7hno_UIY2VGiNAPRc9mTfT0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"comment\":\"Hello World\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/post/comment/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"post",
+						"comment",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Comment ",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMjViNTdlMTk4NzQyMTJiMGNmOGE2YyIsImlhdCI6MTU5NjkxOTUzOSwiZXhwIjoxNTk2OTU1NTM5fQ.Ocwq-fpibFKNpkCCLq1G7hno_UIY2VGiNAPRc9mTfT0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8000/post/comment/5f2f099b10d6052314406bdd/5f2f20037405dd2d409f2464",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"post",
+						"comment",
+						"5f2f099b10d6052314406bdd",
+						"5f2f20037405dd2d409f2464"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
