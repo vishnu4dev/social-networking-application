@@ -18,6 +18,9 @@ const validate=()=>{
             body('title').exists().withMessage('title is req'), 
             body('company').exists().withMessage('company is req'), 
             body('fromDate').isDate().withMessage('fromDate is invalid'), 
+        ],
+        "postFeed":[
+            body('text').exists().withMessage('text is req')
         ]
     }
 }

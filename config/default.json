@@ -1,4 +1,6 @@
 {
     "mongoURI" : "mongodb+srv://merndb:123@mern.kx0zp.mongodb.net/test",
-    "jwtCode" :"1234Token"
+    "jwtCode" :"1234Token",
+    "gitHubClientId":"10ed2a67eb2fdb3a4218",
+    "gitHubSecret":"9ec5aff0ff01beb1b0f956a0ff567f9a204e45ae"
 }
