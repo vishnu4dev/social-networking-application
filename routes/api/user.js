@@ -5,27 +5,17 @@ const Bcrypt = require('bcryptjs');
 
 const userModel = require('../../model/User.model');
 const jwt = require('jsonwebtoken');
-const config = require('config');
-const { check, validationResult } = require('express-validator');
-
-import ValidatorController from '../../middleware/validator';
+import config from 'config';
 import UserController from '../controller/user.controller';
 import AuthController from '../../middleware/auth';
+import {validate, RequestValidation} from '../../middleware/validator';
 
-const Validate = new ValidatorController();
+
 const User = new UserController();
 
-router.post('/register',[       
-check('name', 'Name is required').not().isEmpty(),
-check('email', 'Please enter a valid email').isEmail(),
-check('password', 'Invalid password formate').isLength({ min: 6 })
-], async(req, res) => {
+router.post('/register',validate().register,RequestValidation, async(req, res) => {
     try {
         const { name, password, email } = req.body;
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            res.status(400).json({ errors: errors.array() })
-        }else{
             let ifUserExist = await userModel.findOne({email});
             if(ifUserExist){
               return  res.status(400).send("Already exist")
@@ -43,29 +33,44 @@ check('password', 'Invalid password formate').isLength({ min: 6 })
             })
             const salt = await Bcrypt.genSaltSync(10);
             user.password = await Bcrypt.hash(password,salt);
-            await user.save()
-           
            const payload ={
                id: user.id,
            }
-        jwt.sign(payload,config.get('jwtCode'),{expiresIn:36000},(err,token)=>{
-            if(err) throw err;
+           await user.save()
+            jwt.sign(payload,config.get('jwtCode'),{expiresIn:36000},(err,token)=>{
+            if(err) res.status(400).send("Failed to encrpyt user");
             return res.status(200).send({token})
         })   
-        }
     } catch (error) {
-        console.log(" Error in user REG")
+        console.log(" Error in user REG",error)
     }
 })
 
 /**post profile data */
-router.post('/setProfile',AuthController, [ check('status', 'status is required').not().isEmpty(),
-check('skills', 'Please enter list of skills').isEmail(),
-check('name', 'Profile Name').exists()],User.setUserProfile)
+router.post('/setProfile',AuthController,validate().profile,RequestValidation,User.setUserProfile)
+
+router.put('/EditProfile',AuthController,validate().profile,RequestValidation,User.editUserProfile)
 
 // router.post('/setProfile',AuthController,Validate.ProfileValidator,User.setUserProfile)
 
 /**get profile data */
 router.get('/getUserProfile',AuthController,User.getCurrentProfile)
+
+router.get('/listAllProfile',AuthController,User.getAllProfile);
+
+router.get('/:id',User.getProfileByUserId);
+
+router.delete('/',AuthController,User.deleteProfile);
+
+router.put('/expr',AuthController,User.addUserExpereince);
+
+router.delete('/experience/:exp_id',AuthController,User.deleteUserExperience);
+
+
+router.put('/education',AuthController,User.addUserAcademics);
+
+router.delete('/education/:edu_id',AuthController,User.deleteUserQualification)
+
+router.get('/github/:username',User.gitHubApi)
 
 module.exports = router;

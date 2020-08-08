@@ -6,7 +6,8 @@ const UserProfile = new mongoose.Schema({
         ref:'user'
     },
     name:{
-        type:String
+        type:String,
+        required:true,
     },
     company:{
         type:String
@@ -67,14 +68,14 @@ const UserProfile = new mongoose.Schema({
             },
         }
     ],
-    address:[{
+    address:{
         type:String,
         required:true,
-    }],
-    phoneNumber:[{
+    },
+    phoneNumber:{
         type:Number,
         required:true
-    }],
+    },
 });
 
 module.exports =  mongoose.model('profile',UserProfile)
