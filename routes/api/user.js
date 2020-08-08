@@ -5,12 +5,11 @@ const Bcrypt = require('bcryptjs');
 
 const userModel = require('../../model/User.model');
 const jwt = require('jsonwebtoken');
-const config = require('config');
-
+import config from 'config';
 import UserController from '../controller/user.controller';
 import AuthController from '../../middleware/auth';
 import {validate, RequestValidation} from '../../middleware/validator';
-import auth from '../../middleware/auth';
+
 
 const User = new UserController();
 
@@ -34,22 +33,23 @@ router.post('/register',validate().register,RequestValidation, async(req, res) =
             })
             const salt = await Bcrypt.genSaltSync(10);
             user.password = await Bcrypt.hash(password,salt);
-            await user.save()
-           
            const payload ={
                id: user.id,
            }
-        jwt.sign(payload,config.get('jwtCode'),{expiresIn:36000},(err,token)=>{
-            if(err) throw err;
+           await user.save()
+            jwt.sign(payload,config.get('jwtCode'),{expiresIn:36000},(err,token)=>{
+            if(err) res.status(400).send("Failed to encrpyt user");
             return res.status(200).send({token})
         })   
     } catch (error) {
-        console.log(" Error in user REG")
+        console.log(" Error in user REG",error)
     }
 })
 
 /**post profile data */
 router.post('/setProfile',AuthController,validate().profile,RequestValidation,User.setUserProfile)
+
+router.put('/EditProfile',AuthController,validate().profile,RequestValidation,User.editUserProfile)
 
 // router.post('/setProfile',AuthController,Validate.ProfileValidator,User.setUserProfile)
 
@@ -70,5 +70,7 @@ router.delete('/experience/:exp_id',AuthController,User.deleteUserExperience);
 router.put('/education',AuthController,User.addUserAcademics);
 
 router.delete('/education/:edu_id',AuthController,User.deleteUserQualification)
+
+router.get('/github/:username',User.gitHubApi)
 
 module.exports = router;

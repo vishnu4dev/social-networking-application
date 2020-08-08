@@ -1,8 +1,9 @@
 
 import UserModel from '../../model/User.model';
 import UserProfileModel from '../../model/Profile.model';
-import ProfileModel from '../../model/Profile.model';
-const { check, validationResult } = require('express-validator');
+import request from 'request';
+import config from 'config';
+
 
 
 export default class User {
@@ -51,6 +52,36 @@ export default class User {
             }
            } catch (error) {
             res.status(500).send(error.message);
+        }
+    }
+
+
+    /**
+     * 
+     * @param {Same as Profile} req 
+     * @param 
+     */
+    async editUserProfile (req,res){
+        try {
+        const {name,status,skill,address} = req.body;
+        const userId = req.user.id;
+        const profileDetails = {};
+        profileDetails.name=name;
+        profileDetails.user=userId;
+        profileDetails.skill= skill,
+        profileDetails.status = status,
+        profileDetails.address = address
+        let profile = await UserProfileModel.findOne({user:req.user.id});
+        if(profile){
+            profile = await UserProfileModel.findOneAndUpdate({user:req.user.id},{$set:profileDetails},{new:true})
+            res.status(200).send(profile);
+        }
+        else{
+            res.status(404).send('Access denied');
+        }
+        } catch (error) {
+            console.log("Sys Error",error)
+            res.status(500).send(error.message)
         }
     }
 
@@ -184,6 +215,29 @@ export default class User {
             }
         } catch (error) {
             res.status(403).send(error.message);
+        }
+    }
+
+
+    async gitHubApi(req,res){
+        try {
+        const options ={uri:`https:api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${config.get('gitHubClientId')}&client_secret=${config.get('gitHubSecret')}`,
+            method:'GET',
+            headers:{'user-agent':'node.js'}
+    }
+        request(options,(err,res,body)=>{
+            if(err) console.log(err);
+            if(res.statusCode!== 200) {
+                res.status(404).send("No github profile found")
+            }
+            else{
+                res.status(200).send(JSON.parse(body));
+            }
+        })
+            
+        } catch (error) {
+            console.log(error);
+            res.status(500).send("Github Server Error")
         }
     }
 }
