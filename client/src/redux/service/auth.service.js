@@ -1,18 +1,35 @@
 import axios from "axios";
-import Alerts from "../reducers/alertReducer";
-import { RegisterSuccess, RegisterFail } from "../actions/authActions";
+import { RegisterSuccess, RegisterFail, setUserDetails, resetUserDetails } from "../actions/authActions";
 import {setAlert} from '../actions/alertsActions';
+import { URL,config } from "../../config/apiConfig";
+import { setAuthToken } from "../../utils/setAuthToken";
 
+export const loadUser=()=>async dispatch =>{
+    if(localStorage.token){
+        setAuthToken(localStorage.token);
+    }
+    try {
+        const resp = axios.get(`${URL}/auth/`,config);
+        dispatch(setUserDetails(resp.data))
+    } catch (error) {
+        dispatch(resetUserDetails())
+    }
+}
 
 export const registerUser= (data) => async dispatch =>{
+    const {name,email,password} = data;
     try {
-        const resp = await axios.post('/user/register',data)
+        const body = JSON.stringify({name,email,password});
+        const resp = await axios.post(`${URL}/user/register`,body,config)
         dispatch(RegisterSuccess(resp.data))
-    } catch (error) {
-        const errorsMessages = error.response.data.errors;
+        // dispatch(loadUser())
+    } catch (err) {
+       if(err.response.data){ 
+        const errorsMessages = err.response.data.errors;
         dispatch(RegisterFail())
         if(errorsMessages){
-            errorsMessages.forEach(_err => dispatch(setAlert(_err.msg,'danger')));
-        }
+            errorsMessages.forEach(_err => dispatch(setAlert({msg:_err.msg,alertType:'danger'})));
+        }}
+     else dispatch(setAlert({msg:"Server Error",alertType:'warning'}))   
     }
 }

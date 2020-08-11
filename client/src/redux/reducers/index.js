@@ -4,5 +4,5 @@ import authReducer from './authReducer';
 
 export default combineReducers({
   Alerts,
-  UserLogged:authReducer,
+  User:authReducer,
 });

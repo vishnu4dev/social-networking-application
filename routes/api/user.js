@@ -18,7 +18,8 @@ router.post('/register',validate().register,RequestValidation, async(req, res) =
         const { name, password, email } = req.body;
             let ifUserExist = await userModel.findOne({email});
             if(ifUserExist){
-              return  res.status(400).send("Already exist")
+              return 
+               res.status(400).send("Already exist")
             }
             const avatar = gravatar.url(email,{
                 s:'200',
@@ -38,11 +39,12 @@ router.post('/register',validate().register,RequestValidation, async(req, res) =
            }
            await user.save()
             jwt.sign(payload,config.get('jwtCode'),{expiresIn:36000},(err,token)=>{
-            if(err) res.status(400).send("Failed to encrpyt user");
+            if(err) return res.status(400).send("Failed to encrypt user");
             return res.status(200).send({token})
         })   
     } catch (error) {
         console.log(" Error in user REG",error)
+        return res.status(500).send(error)
     }
 })
 

@@ -10,7 +10,7 @@ const validate=()=>{
             body('phoneNumber').exists().withMessage("Phone number is req"),       
         ],
         "register":[
-            body('name').exists().withMessage('Name is req'), 
+            body('name').notEmpty().withMessage('Name is req'), 
             body('email').isEmail().withMessage('Email is Invalid'), 
             body('password').isLength({ min: 6 }).withMessage('Password is invalid'), 
         ],
@@ -28,9 +28,10 @@ const validate=()=>{
 const RequestValidation=(req,res,next)=>{
     const error = validationResult(req);
     if(!error.isEmpty()){
-    console.log(error,"******* Input Error *******");
-    res.status(422).send({error});
+    console.log("******* Input Error *******");
+    return res.status(400).json({errors:error.array()});
     }
+    console.log(error)
     next();
 }
 

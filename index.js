@@ -5,6 +5,10 @@ const Auth = require('./routes/api/auth');
 const userFeeds = require('./routes/api/post');
 
 const app = express();
+const cors= require('cors');
+app.use(cors());
+app.use(cors({origin: true, credentials: true}));
+
 dbconnect();
 const PORT = process.env.PORT || 8000;
 

@@ -7,7 +7,7 @@ import AuthMiddileWare from '../../middleware/auth'
 import AuthController from '../controller/auth.controller'
 const Auth = new AuthController();
 
-router.post('/',AuthMiddileWare,async(req,res)=>{
+router.get('/',AuthMiddileWare,async(req,res)=>{
     try {
         const respo = await UserModel.findById(req.user.id).select('-password');
         if(respo){
