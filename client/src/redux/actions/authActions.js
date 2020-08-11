@@ -1,4 +1,4 @@
-import {REG_SUCCESS, REG_FAIL, USER_AUTH_SUCCESS, USER_AUTH_FAIL} from './types';
+import {REG_SUCCESS, REG_FAIL, USER_AUTH_SUCCESS, USER_AUTH_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, LOG_OUT} from './types';
 
 
 
@@ -19,5 +19,18 @@ export const setUserDetails=(data)=>({
 export const resetUserDetails=()=>({
     type: USER_AUTH_FAIL,
 });
+
+export const loginUserSuccess=(data)=>({
+    type:LOGIN_SUCCESS,
+    payload:data,
+})
+
+export const loginUserFail=()=>({
+    type: LOGIN_FAIL,
+}); 
+
+export const logoutUser=()=>({
+    type: LOG_OUT
+})
 
 

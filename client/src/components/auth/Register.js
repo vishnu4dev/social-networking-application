@@ -20,6 +20,12 @@ const Register = (props) => {
         if(password === password2){
             console.log("Form : ",formData);
             regUserAction(formData);
+            setFormData({
+              name:'',
+              email:'',
+              password:'',
+              password2:''
+          })
         }
         else{
           let data ={msg:'Password mismatch',alertType:'danger'}

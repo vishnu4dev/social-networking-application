@@ -1,7 +1,10 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { loginUser } from '../../redux/service/auth.service';
+import { setAlert } from '../../redux/actions/alertsActions';
 
-export const Login = () => {
+const Login = ({loginAction,isAuthenticated,setAlertAction}) => {
     const [formData,setFormData] = useState({
         email:'',
         password:''
@@ -13,9 +16,22 @@ export const Login = () => {
     
     const handleFormSubmit=(e)=>{
         e.preventDefault();
-        console.log("---- Submit Login",formData)
+       if(password.length  > 0 && email.length > 0 ){
+          loginAction(formData);
+          setFormData({
+            email:'',
+            password:'',
+        })
+       }
+       else{ 
+         setAlertAction({msg:'All Fields are mandat.*',alertType:'warning'});
+        }
+      }
+      
+    
+    if(isAuthenticated){
+      return <Redirect to='/dashboard' /> 
     }
-
     return (
         <>
         <h1 className="large text-primary">Log In</h1>
@@ -32,7 +48,6 @@ export const Login = () => {
               type="password"
               placeholder="Password"
               name="password"
-              minLength="6"
               value={password} 
               onChange={(e)=>{handleFormData(e)}}
             />
@@ -45,3 +60,19 @@ export const Login = () => {
         </>
     )
 }
+
+
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.User.isAuthenticated
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    loginAction : (data) => dispatch(loginUser(data)),
+    setAlertAction:(data) =>dispatch(setAlert(data)),
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Login)

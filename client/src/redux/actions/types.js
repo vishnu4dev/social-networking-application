@@ -10,3 +10,15 @@ export const REG_FAIL = 'REG_FAIL';
 export const USER_AUTH_SUCCESS = 'USER_AUTH_SUCCESS';
 export const USER_AUTH_FAIL = 'USER_AUTH_FAIL';
     
+
+/** Login user */
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+
+/** Logout Type */
+export const LOG_OUT = 'LOG_OUT';
+
+
+/** Get user profile */
+export const GET_PROFILE_SUCCESS = 'GET_PROFILE_SUCCESS';
+export const GET_PROFILE_FAILS = 'GET_PROFILE_FAILS';
