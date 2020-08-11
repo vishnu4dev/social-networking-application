@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import {connect} from  'react-redux';
 import {setAlert} from '../../redux/actions/alertsActions';
 import PropTypes from 'prop-types';
+import { registerUser } from '../../redux/service/auth.service';
 
 const Register = (props) => {
-    const {setAlertAction} = props;
+    const {setAlertAction,regUserAction} = props;
     const [formData,setFormData] = useState({
         name:'',
         email:'',
@@ -18,6 +19,7 @@ const Register = (props) => {
         e.preventDefault();
         if(password === password2){
             console.log("Form : ",formData);
+            regUserAction(formData);
         }
         else{
           let data ={msg:'Password mismatch',alertType:'danger'}
@@ -31,7 +33,7 @@ const Register = (props) => {
         <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
         <form className="form" onSubmit={(e)=>{handleFormSubmit(e)}}>
           <div className="form-group">
-            <input type="text" placeholder="Name" name="name" value={name} required onChange={(e)=>{handleFormData(e)}} />
+            <input type="text" placeholder="Name" name="name" value={name}  onChange={(e)=>{handleFormData(e)}} />
           </div>
           <div className="form-group">
             <input type="email" placeholder="Email Address" name="email" value={email}  onChange={(e)=>{handleFormData(e)}}/>
@@ -45,7 +47,6 @@ const Register = (props) => {
               type="password"
               placeholder="Password"
               name="password"
-              minLength="6"
               value={password} 
               onChange={(e)=>{handleFormData(e)}}
             />
@@ -56,7 +57,6 @@ const Register = (props) => {
               placeholder="Confirm Password"
               name="password2"
               value={password2} 
-              minLength="6"
               onChange={(e)=>{handleFormData(e)}}
             />
           </div>
@@ -71,12 +71,14 @@ const Register = (props) => {
 
 const mapDispatchToProps=(dispatch)=>{
   return {
-    setAlertAction : (data) => (dispatch(setAlert(data)))
+    setAlertAction : (data) => (dispatch(setAlert(data))),
+    regUserAction : (data) => (dispatch(registerUser(data)))
   };
 }
 
 Register.propTypes ={
   setAlertAction : PropTypes.func.isRequired,
+  regUserAction: PropTypes.func.isRequired,
 }
 
 
