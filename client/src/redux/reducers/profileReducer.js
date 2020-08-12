@@ -1,8 +1,8 @@
-import {Landing} from '../../components/layout/Landing'
+import {GET_PROFILE_FAILS, GET_PROFILE_SUCCESS} from '../actions/types'
 
 const initialState={
     profile:null,
-    profile:[],
+    profiles:[],
     repos:[],
     loading:true,
     error:{},
@@ -12,11 +12,19 @@ const initialState={
 export default function(state = initialState ,action){
     const {type,payload} = action;
     switch (type) {
-        case :
-            
-            break;
-    
+        case GET_PROFILE_SUCCESS:
+            return{
+                ...state,
+                profile:payload,
+                loading:false,
+            }
+        case GET_PROFILE_FAILS:
+            return{
+                ...state,
+                error:payload,
+                loading:false,
+            }
         default:
-            break;
+            return state;
     }
 }

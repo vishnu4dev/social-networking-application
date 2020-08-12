@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
- export const Landing=()=>{
+ const Landing=()=>{
     return (
         <section className="landing">
         <div className="dark-overlay">
@@ -20,4 +21,7 @@ import { Link } from 'react-router-dom'
       </section>
     )
 }
+
+
+export default connect(mapStateToProp,mapDispatchToProp)(Landing)
 
