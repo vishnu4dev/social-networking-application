@@ -10,7 +10,9 @@ export const loadUser=()=>async dispatch =>{
     }
     try {
         const result = await axios.get(`${URL}/auth/`,config);
-        dispatch(setUserDetails(result.data))
+       if(result.status === 200){
+         dispatch(setUserDetails(result.data))
+        }
     } catch (error) {
         dispatch(resetUserDetails())
     }
@@ -21,9 +23,11 @@ export const registerUser= (data) => async dispatch =>{
     try {
         const body = JSON.stringify({name,email,password});
         const resp = await axios.post(`${URL}/user/register`,body,config)
+        if(resp.status === 200){
         dispatch(RegisterSuccess(resp.data))
         dispatch(loadUser())
         dispatch(setAlert({msg:'User Reg.',alertType:'success'}))
+         }
     } catch (err) {
        if(err.response.data){ 
         const errorsMessages = err.response.data.errors;
@@ -40,7 +44,7 @@ export const loginUser= (data) => async dispatch =>{
     try {
         const body = JSON.stringify({email,password});
         const resp = await axios.post(`${URL}/auth/login`,body,config)
-       if(resp.data){ 
+       if(resp.status === 200){ 
         dispatch(loginUserSuccess(resp.data))
         dispatch(loadUser())
     }

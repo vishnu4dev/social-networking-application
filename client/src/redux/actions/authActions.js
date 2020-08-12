@@ -1,4 +1,4 @@
-import {REG_SUCCESS, REG_FAIL, USER_AUTH_SUCCESS, USER_AUTH_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, LOG_OUT} from './types';
+import {REG_SUCCESS, CLEAR_PROFILE,REG_FAIL, USER_AUTH_SUCCESS, USER_AUTH_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, LOG_OUT} from './types';
 
 
 
@@ -29,8 +29,8 @@ export const loginUserFail=()=>({
     type: LOGIN_FAIL,
 }); 
 
-export const logoutUser=()=>({
-    type: LOG_OUT
-})
-
+export const logoutUser=()=>dispatch=>{
+    dispatch({type: LOG_OUT});
+    dispatch({type: CLEAR_PROFILE});
+}
 

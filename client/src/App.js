@@ -2,7 +2,7 @@ import React, { Fragment,useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import  Navbar  from "./components/layout/Navbar";
-import { Landing } from "./components/layout/Landing";
+import  Landing  from "./components/layout/Landing";
 import  Register  from "./components/auth/Register";
 import  Login  from "./components/auth/Login";
 
@@ -13,6 +13,8 @@ import { loadUser } from "./redux/service/auth.service";
 import { setAuthToken } from "./utils/setAuthToken";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
+import CreateUserProfile from "./components/profile/CreateUserProfile";
+
 
 const App = () => {
 
@@ -35,6 +37,7 @@ const App = () => {
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
               <PrivateRoute component={Dashboard} path='/dashboard' exact />
+              <PrivateRoute component={CreateUserProfile} path='/create-profile' exact />
             </Switch>
           </section>
         </Fragment>

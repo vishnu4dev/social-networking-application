@@ -68,7 +68,6 @@ router.put('/expr',AuthController,User.addUserExpereince);
 
 router.delete('/experience/:exp_id',AuthController,User.deleteUserExperience);
 
-
 router.put('/education',AuthController,User.addUserAcademics);
 
 router.delete('/education/:edu_id',AuthController,User.deleteUserQualification)

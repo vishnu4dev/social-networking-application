@@ -18,6 +18,8 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 /** Logout Type */
 export const LOG_OUT = 'LOG_OUT';
 
+/** Clear Profile Type */
+export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 
 /** Get user profile */
 export const GET_PROFILE_SUCCESS = 'GET_PROFILE_SUCCESS';

@@ -1,9 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
- const Landing=()=>{
+ const Landing=({isAuthenticated,usertoken})=>{
     return (
+      usertoken || isAuthenticated ?
+      <Redirect to='/dashboard' />
+       :
         <section className="landing">
         <div className="dark-overlay">
           <div className="landing-inner">
@@ -22,6 +25,10 @@ import { connect } from 'react-redux'
     )
 }
 
+const mapStateToProps= state =>({
+  isAuthenticated: state.User.isAuthenticated,
+  usertoken: state.User.token,
+})
 
-export default connect(mapStateToProp,mapDispatchToProp)(Landing)
+export default connect(mapStateToProps,null)(Landing)
 

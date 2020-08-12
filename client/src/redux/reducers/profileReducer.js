@@ -1,4 +1,4 @@
-import {GET_PROFILE_FAILS, GET_PROFILE_SUCCESS} from '../actions/types'
+import {GET_PROFILE_FAILS,CLEAR_PROFILE, GET_PROFILE_SUCCESS} from '../actions/types'
 
 const initialState={
     profile:null,
@@ -22,6 +22,12 @@ export default function(state = initialState ,action){
             return{
                 ...state,
                 error:payload,
+                loading:false,
+            }
+        case CLEAR_PROFILE:
+            return{
+                ...state,
+                profile:null,
                 loading:false,
             }
         default:
